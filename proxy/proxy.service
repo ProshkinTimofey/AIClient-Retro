@@ -1,0 +1,22 @@
+[Unit]
+Description=AIClient TLS Proxy (iOS 6 -> Modern APIs)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/aiclient-proxy
+ExecStart=/opt/aiclient-proxy/aiclient-proxy -listen :8080 -target api.openai.com -v
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/aiclient-proxy
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AIClient" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L44-zg-Ox3">
+                                <rect key="frame" x="136" y="398" width="120" height="56"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="48" weight="bold"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AI Chat & Image Generation" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZf-9a-bC2">
+                                <rect key="frame" x="96" y="466" width="200" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17" weight="regular"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView style="large" translatesAutoresizingMaskIntoConstraints="NO" id="aRg-7b-Vc1">
+                                <rect key="frame" x="176" y="510" width="40" height="40"/>
+                                <color key="color" systemColor="systemBlueColor"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="L44-zg-Ox3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1"/>
+                            <constraint firstItem="L44-zg-Ox3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="2"/>
+                            <constraint firstItem="kZf-9a-bC2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3"/>
+                            <constraint firstItem="kZf-9a-bC2" firstAttribute="top" secondItem="L44-zg-Ox3" secondAttribute="bottom" constant="12" id="4"/>
+                            <constraint firstItem="aRg-7b-Vc1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5"/>
+                            <constraint firstItem="aRg-7b-Vc1" firstAttribute="top" secondItem="kZf-9a-bC2" secondAttribute="bottom" constant="24" id="6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-QB2"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-E31" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color white="0.23529411764705882" alpha="1.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1.0" alpha="1.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1.0" alpha="1.0" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

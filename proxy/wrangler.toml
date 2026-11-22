@@ -1,0 +1,41 @@
+# Cloudflare Workers configuration for AIClient TLS Proxy
+# Install: npm install -g wrangler
+# Deploy: wrangler deploy
+
+name = "aiclient-proxy"
+main = "worker.js"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Environment variables (set in Cloudflare Dashboard or .dev.vars)
+[vars]
+# Target AI API hostname - CHANGE PER PROVIDER:
+# OpenAI: api.openai.com
+# Anthropic: api.anthropic.com
+# Google Gemini: generativelanguage.googleapis.com
+# NVIDIA NIM: api.nvidia.com
+TARGET_HOST = "api.openai.com"
+
+# Allowed CORS origins (comma-separated). Use "*" for all, or your app bundle ID
+ALLOWED_ORIGINS = "*"
+
+# Enable verbose logging
+VERBOSE_LOGGING = "false"
+
+# For multiple providers, create separate workers:
+# [env.openai]
+# vars = { TARGET_HOST = "api.openai.com" }
+#
+# [env.anthropic]
+# vars = { TARGET_HOST = "api.anthropic.com" }
+#
+# [env.gemini]
+# vars = { TARGET_HOST = "generativelanguage.googleapis.com" }
+#
+# [env.nvidia]
+# vars = { TARGET_HOST = "api.nvidia.com" }
+
+# Custom domain (optional, configure in Cloudflare Dashboard)
+# routes = [
+#   { pattern = "proxy.yourdomain.com/*", zone_name = "yourdomain.com" }
+# ]

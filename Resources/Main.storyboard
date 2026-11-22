@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <tabBarController id="BYZ-38-t0r" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Nav-Chat" kind="relationship" relationship="viewControllers" id="seg-Chat"/>
+                        <segue destination="Nav-Settings" kind="relationship" relationship="viewControllers" id="seg-Settings"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="165" y="191"/>
+        </scene>
+        <scene sceneID="vXq-Hm-2qP">
+            <objects>
+                <navigationController storyboardIdentifier="Nav-Chat" id="Nav-Chat" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nav-Bar-Chat">
+                        <rect key="frame" x="0.0" y="44.0" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" hidden="YES" id="Toolbar-Chat">
+                        <rect key="frame" x="0.0" y="803.0" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="RootVC" kind="relationship" relationship="rootViewController" id="seg-Root"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-E31" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="165" y="371"/>
+        </scene>
+        <scene sceneID="KfE-3q-LmN">
+            <objects>
+                <navigationController storyboardIdentifier="Nav-Settings" id="Nav-Settings" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nav-Bar-Settings">
+                        <rect key="frame" x="0.0" y="44.0" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SettingsVC" kind="relationship" relationship="rootViewController" id="seg-Settings-Root"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-E31" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="585" y="371"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1.0" alpha="1.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
