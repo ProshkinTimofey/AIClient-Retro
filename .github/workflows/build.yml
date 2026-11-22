@@ -23,55 +23,36 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Install Theos dependencies
         run: |
           brew install ldid dpkg wget xz
-          # Install Theos
           git clone --depth=1 https://github.com/theos/theos.git /opt/theos
           echo "THEOS=/opt/theos" >> $GITHUB_ENV
-          export THEOS=/opt/theos
-          # Install iOS 6.1 SDK for legacy support
-          if [ ! -d "$THEOS/sdks/iPhoneOS6.1.sdk" ]; then
-            mkdir -p $THEOS/sdks
-            cd $THEOS/sdks
-            wget -q https://github.com/haikieu/xcode-sdks/releases/download/6.1/iPhoneOS6.1.sdk.tar.xz
-            tar -xf iPhoneOS6.1.sdk.tar.xz
-            rm iPhoneOS6.1.sdk.tar.xz
-          fi
-
-      - name: Setup environment
-        run: |
-          export THEOS=/opt/theos
-          export SDKROOT=$THEOS/sdks/iPhoneOS6.1.sdk
-          export PATH=$THEOS/bin:$PATH
-          echo "THEOS=/opt/theos" >> $GITHUB_ENV
-          echo "SDKROOT=$THEOS/sdks/iPhoneOS6.1.sdk" >> $GITHUB_ENV
+          
+          # Install iOS 6.1 SDK
+          mkdir -p /opt/theos/sdks
+          cd /opt/theos/sdks
+          wget -q https://github.com/haikieu/xcode-sdks/releases/download/6.1/iPhoneOS6.1.sdk.tar.xz
+          tar -xf iPhoneOS6.1.sdk.tar.xz
+          rm iPhoneOS6.1.sdk.tar.xz
 
       - name: Build AIClient
-        working-directory: ./AIClient
         env:
           THEOS: /opt/theos
           SDKROOT: /opt/theos/sdks/iPhoneOS6.1.sdk
         run: |
           export THEOS=/opt/theos
-          export SDKROOT=$THEOS/sdks/iPhoneOS6.1.sdk
+          export SDKROOT=/opt/theos/sdks/iPhoneOS6.1.sdk
           export PATH=$THEOS/bin:$PATH
 
-          # Verify SDK
-          ls -la $SDKROOT
-
-          # Build with iOS 6 SDK
+          # Build package
           make clean
           make package FINALPACKAGE=1 DEBUG=0
 
-          # List outputs
           ls -la packages/
 
       - name: Convert .deb to .ipa
-        working-directory: ./AIClient
         env:
           THEOS: /opt/theos
         run: |
@@ -84,24 +65,21 @@ jobs:
             exit 1
           fi
 
-          # Extract .deb
           mkdir -p build/ipa/Payload
           dpkg-deb -x "$DEB_FILE" build/ipa
 
-          # Find .app
           APP_PATH=$(find build/ipa -name "*.app" -type d | head -1)
           if [ -z "$APP_PATH" ]; then
             echo "No .app found in .deb!"
             exit 1
           fi
 
-          # Create .ipa
           cp -r "$APP_PATH" build/ipa/Payload/
           cd build/ipa
           zip -r "../../AIClient.ipa" Payload
           cd ../..
 
-          echo "IPA created: $(pwd)/AIClient.ipa"
+          echo "IPA created successfully:"
           ls -la AIClient.ipa
 
       - name: Upload artifacts
@@ -109,8 +87,8 @@ jobs:
         with:
           name: AIClient-build
           path: |
-            AIClient/packages/*.deb
-            AIClient/AIClient.ipa
+            packages/*.deb
+            AIClient.ipa
           retention-days: 30
 
   release:
@@ -129,7 +107,7 @@ jobs:
           path: ./artifacts
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
           name: AIClient ${{ github.ref_name }}
@@ -137,25 +115,13 @@ jobs:
             ## AIClient for iOS 6+
 
             **Supported iOS versions:** 6.0 - 17+
-
             **Architectures:** armv7, armv7s, arm64
-
             **Providers:** OpenAI, Anthropic, Google Gemini, NVIDIA NIM
+            **Themes:** Claude Code Terminal, Skeuomorphic (iOS 6), Minimalist
 
-            **Themes:** Skeuomorphic (iOS 6), Minimalist (iOS 13+), Claude Code (Terminal)
-
-            ### Installation
-
-            **For iOS 13+:** Direct connection, no proxy needed.
-
-            **For iOS 6-12:** Use TLS proxy:
-            - Local: `proxy/main.py` (Python)
-            - Cloud: Free Cloudflare Worker (`proxy/worker.js`)
-
-            **Install .ipa:** Sideloadly, TrollStore, or Cydia
-
-            ### Changes
-            See commit history for details.
+            ### Installation:
+            - **iOS 13+:** Direct connection, no proxy needed. Install via Sideloadly or TrollStore.
+            - **iOS 6-12:** Use Cloudflare Worker (`proxy/worker.js`) or local Python proxy (`proxy/main.py`).
           files: |
             artifacts/*.deb
             artifacts/*.ipa
